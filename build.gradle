@@ -1,0 +1,43 @@
+plugins {
+    id 'java'
+}
+
+group = 'com.portfolio'
+version = '1.0.0-SNAPSHOT'
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(21)
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    // UI automation
+    testImplementation 'org.seleniumhq.selenium:selenium-java:4.25.0'
+
+    // Test runner
+    testImplementation 'org.testng:testng:7.10.2'
+
+    // API automation
+    testImplementation 'io.rest-assured:rest-assured:5.5.0'
+
+    // Logging (silences the SLF4J "no provider" warning)
+    testImplementation 'org.slf4j:slf4j-simple:2.0.16'
+}
+
+test {
+    useTestNG()
+
+    // Pass -D properties from the Gradle command line into the test JVM
+    // e.g. ./gradlew test -Dbrowser=firefox
+    systemProperties System.properties
+
+    testLogging {
+        events 'passed', 'failed', 'skipped'
+        showStandardStreams = true
+    }
+}
