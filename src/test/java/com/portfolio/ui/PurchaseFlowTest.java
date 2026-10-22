@@ -7,12 +7,14 @@ import com.portfolio.pages.CartPage;
 import com.portfolio.pages.CheckoutInfoPage;
 import com.portfolio.pages.InventoryPage;
 import com.portfolio.pages.LoginPage;
+import io.qameta.allure.Feature;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import java.util.Arrays;
 
+@Feature("Purchase flow")
 public class PurchaseFlowTest extends BaseUiTest {
 
     private InventoryPage loginAndOpenInventory() {

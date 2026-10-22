@@ -5,10 +5,12 @@ import com.portfolio.config.ConfigReader;
 import com.portfolio.driver.DriverFactory;
 import com.portfolio.pages.InventoryPage;
 import com.portfolio.pages.LoginPage;
+import io.qameta.allure.Feature;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
+@Feature("Login")
 public class LoginTest extends BaseUiTest {
 
     @Test

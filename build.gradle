@@ -15,26 +15,37 @@ repositories {
     mavenCentral()
 }
 
+configurations {
+    agent
+}
+
 dependencies {
-    // UI automation
     implementation 'org.seleniumhq.selenium:selenium-java:4.25.0'
-
-    // Test runner
     testImplementation 'org.testng:testng:7.10.2'
-
-    // API automation
     implementation 'io.rest-assured:rest-assured:5.5.0'
-
-    // Logging (silences the SLF4J "no provider" warning)
     testImplementation 'org.slf4j:slf4j-simple:2.0.16'
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.17.2'
+    implementation 'io.qameta.allure:allure-java-commons:2.29.0'
+    implementation 'io.qameta.allure:allure-rest-assured:2.29.0'
+    testImplementation 'io.qameta.allure:allure-testng:2.29.0'
+
+    agent 'org.aspectj:aspectjweaver:1.9.22.1'
 }
 
 test {
-    useTestNG()
+    useTestNG {
+        listeners = ['com.portfolio.listeners.TestListener']
+    }
 
-    // Pass -D properties from the Gradle command line into the test JVM
-    // e.g. ./gradlew test -Dbrowser=firefox
-    systemProperties System.properties
+
+    jvmArgs "-javaagent:${configurations.agent.singleFile}"
+    systemProperty 'allure.results.directory', "$buildDir/allure-results"
+
+    ['browser', 'headless', 'execution', 'env', 'api.base.url', 'ui.base.url'].each { key ->
+        if (System.getProperty(key)) {
+            systemProperty key, System.getProperty(key)
+        }
+    }
 
     testLogging {
         events 'passed', 'failed', 'skipped'

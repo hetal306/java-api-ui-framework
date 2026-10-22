@@ -44,6 +44,10 @@ public class DriverFactory {
         return driver;
     }
 
+    public static boolean hasDriver(){
+        return DRIVER.get() !=null;
+    }
+
     public static void quitDriver() {
         WebDriver driver = DRIVER.get();
         if (driver != null) {
