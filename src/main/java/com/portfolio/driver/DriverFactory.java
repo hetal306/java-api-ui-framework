@@ -11,6 +11,8 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 
 import java.net.MalformedURLException;
 import java.net.URI;
+import java.util.HashMap;
+import java.util.Map;
 
 public class DriverFactory {
 
@@ -54,6 +56,13 @@ public class DriverFactory {
         return switch (browser) {
             case "chrome" -> {
                 ChromeOptions options = new ChromeOptions();
+                Map<String, Object> prefernces = new HashMap<>();
+                prefernces.put("credentials_enable_service", false);
+                prefernces.put("profile.password_manager_enabled", false);
+                prefernces.put("profile.password_manager_leak_detection", false);
+                options.setExperimentalOption("prefs", prefernces);
+
+                options.addArguments("--disable-notifications", "--disable-infobars");
                 if (headless) {
                     options.addArguments("--headless=new", "--windows-size=1920,1080");
                 }
