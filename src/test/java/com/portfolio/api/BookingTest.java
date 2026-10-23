@@ -21,7 +21,7 @@ public class BookingTest {
     private BookingClient client;
     private String token;
 
-    @BeforeClass
+    @BeforeClass(alwaysRun = true)
     public void setUp() {
         client = new BookingClient();
         token = client.getValidToken();
@@ -78,7 +78,7 @@ public class BookingTest {
         Assert.assertEquals(client.getBooking(id).statusCode(), 404);
     }
 
-    @Test
+    @Test(groups = "smoke")
     public void unknownBookingReturns404() {
         Assert.assertEquals(client.getBooking(999999999).statusCode(), 404);
     }
@@ -92,7 +92,7 @@ public class BookingTest {
         Assert.assertEquals(response.statusCode(), 403);
     }
 
-    @Test
+    @Test(groups = "smoke")
     public void wrongCredentialsAreRejected() {
         Response response = client.createToken("admin", "wrong_password");
 
@@ -100,7 +100,7 @@ public class BookingTest {
         Assert.assertNull(response.jsonPath().getString("token"));
     }
 
-    @Test
+    @Test(groups = "smoke")
     public void bookingListIsNotEmpty() {
         Response response = client.getBookingIds();
 

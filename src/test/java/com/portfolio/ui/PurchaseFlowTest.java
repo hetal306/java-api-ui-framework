@@ -51,7 +51,7 @@ public class PurchaseFlowTest extends BaseUiTest {
         };
     }
 
-    @Test(dataProvider = "orders")
+    @Test(dataProvider = "orders", groups = "smoke")
     public void userCanCompletePurchase(String[] products, String expectedSubTotal) {
         InventoryPage inventoryPage = loginAndOpenInventory();
         for (String product : products) {

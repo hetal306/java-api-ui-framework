@@ -6,7 +6,7 @@ import org.testng.annotations.BeforeMethod;
 
 public abstract class BaseUiTest {
 
-    @BeforeMethod
+    @BeforeMethod(alwaysRun = true)
     public void setUp() {
         DriverFactory.initDriver();
     }

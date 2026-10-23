@@ -2,6 +2,7 @@ package com.portfolio.pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class CheckoutOverviewPage extends BasePage {
 
@@ -10,6 +11,7 @@ public class CheckoutOverviewPage extends BasePage {
 
     protected CheckoutOverviewPage(WebDriver driver) {
         super(driver);
+        wait.until(ExpectedConditions.urlContains("checkout-step-two"));
     }
 
     public String getSubtotal() {

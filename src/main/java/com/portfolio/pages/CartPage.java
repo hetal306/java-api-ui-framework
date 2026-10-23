@@ -2,6 +2,7 @@ package com.portfolio.pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.util.List;
 
@@ -12,6 +13,7 @@ public class CartPage extends BasePage {
 
     protected CartPage(WebDriver driver) {
         super(driver);
+        wait.until(ExpectedConditions.urlContains("cart.html"));
     }
 
     public List<String> getItemNames() {
@@ -23,7 +25,7 @@ public class CartPage extends BasePage {
         return this;
     }
 
-    public  CheckoutInfoPage proceedToCheckout(){
+    public CheckoutInfoPage proceedToCheckout() {
         click(CHECKOUT_BUTTON);
         return new CheckoutInfoPage(driver);
     }

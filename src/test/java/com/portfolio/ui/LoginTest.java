@@ -13,7 +13,7 @@ import org.testng.annotations.Test;
 @Feature("Login")
 public class LoginTest extends BaseUiTest {
 
-    @Test
+    @Test(groups = "smoke")
     public void validUserCanLogin() {
         InventoryPage inventoryPage = new LoginPage(DriverFactory.getDriver())
                 .open()

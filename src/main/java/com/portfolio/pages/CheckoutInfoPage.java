@@ -2,6 +2,7 @@ package com.portfolio.pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class CheckoutInfoPage extends BasePage {
 
@@ -13,6 +14,7 @@ public class CheckoutInfoPage extends BasePage {
 
     protected CheckoutInfoPage(WebDriver driver) {
         super(driver);
+        wait.until(ExpectedConditions.urlContains("checkout-step-one"));
     }
 
     public CheckoutOverviewPage continueWith(String firstName, String lastName, String postalCode) {

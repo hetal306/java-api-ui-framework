@@ -2,6 +2,7 @@ package com.portfolio.pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class InventoryPage extends BasePage {
 
@@ -11,6 +12,7 @@ public class InventoryPage extends BasePage {
 
     protected InventoryPage(WebDriver driver) {
         super(driver);
+        wait.until(ExpectedConditions.urlContains("inventory.html"));
     }
 
     private static String plugPartialProduct(String productName) {

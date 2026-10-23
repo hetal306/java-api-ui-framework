@@ -28,13 +28,17 @@ dependencies {
     implementation 'io.qameta.allure:allure-java-commons:2.29.0'
     implementation 'io.qameta.allure:allure-rest-assured:2.29.0'
     testImplementation 'io.qameta.allure:allure-testng:2.29.0'
-
+    implementation 'com.h2database:h2:2.3.232'
     agent 'org.aspectj:aspectjweaver:1.9.22.1'
 }
 
 test {
+    // ./gradlew test -Psuite=smoke   (default: regression)
+    def suiteName = project.findProperty('suite') ?: 'regression'
+
     useTestNG {
         listeners = ['com.portfolio.listeners.TestListener']
+        suites file("src/test/resources/suites/${suiteName}.xml")
     }
 
 
@@ -52,3 +56,10 @@ test {
         showStandardStreams = true
     }
 }
+tasks.register('qualityGate', JavaExec) {
+    group = 'verification'
+    description = 'Fails if the pass rate stored in the results DB is below the threshold'
+    classpath = sourceSets.main.runtimeClasspath
+    mainClass = 'com.portfolio.db.QualityGate'
+}
+//to execute quality gate use command : ./gradlew clean test qualityGate --continue
